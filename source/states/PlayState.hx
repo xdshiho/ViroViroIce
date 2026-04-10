@@ -297,6 +297,10 @@ class PlayState extends ScriptedState
 	 * Group containing all note splashes.
 	*/
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash> = new FlxTypedGroup<NoteSplash>();
+	/**
+	 * Group containing all note hold splashes.
+	*/
+	public var grpHoldSplashes:FlxTypedGroup<SustainSplash> = new FlxTypedGroup<SustainSplash>();
 
 	/**
 	 * Whether the camera should bop every measure or not.
@@ -762,6 +766,7 @@ class PlayState extends ScriptedState
 		generateSong();
 
 		noteGroup.add(grpNoteSplashes);
+		noteGroup.add(grpHoldSplashes);
 
 		camFollow = new FlxObject();
 		camFollow.setPosition(camPos.x, camPos.y);
@@ -867,6 +872,11 @@ class PlayState extends ScriptedState
 		var splash:NoteSplash = new NoteSplash();
 		grpNoteSplashes.add(splash);
 		splash.alpha = 0.0001; //cant make it invisible or it won't allow precaching
+
+		SustainSplash.startCrochet = Conductor.stepCrochet;
+		SustainSplash.frameRate = Math.floor(24 / 100 * SONG.bpm);
+		var holdSplash:SustainSplash = new SustainSplash();
+		holdSplash.alpha = 0.0001;
 		
 		if (ClientPrefs.data.hitsoundVolume > 0) Paths.sound('hitsound');
 		if (!ghostTapping) for (i in 1...4) Paths.sound('missnote$i');	
@@ -3402,6 +3412,12 @@ class PlayState extends ScriptedState
 				invalidateNote(note);
 		});
 
+		final end:Note = daNote.isSustainNote ? daNote.parent.tail[daNote.parent.tail.length - 1] : daNote.tail[daNote.tail.length - 1];
+		if (end != null && end.extraData['holdSplash'] != null)
+		{
+			end.extraData['holdSplash'].visible = false;
+		}
+
 		noteMissCommon(daNote.noteData, daNote);
 		stagesFunc(function(stage:BaseStage) stage.noteMiss(daNote));
 		
@@ -3556,6 +3572,8 @@ class PlayState extends ScriptedState
 		var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
 		if(result != LuaUtils.Function_Stop && result != LuaUtils.Function_StopHScript && result != LuaUtils.Function_StopAll) callOnHScript('opponentNoteHit', [note]);
 
+		spawnHoldSplashOnNote(note);
+
 		if (!note.isSustainNote) invalidateNote(note);
 	}
 
@@ -3659,6 +3677,7 @@ class PlayState extends ScriptedState
 		stagesFunc(function(stage:BaseStage) stage.goodNoteHit(note));
 		var result:Dynamic = callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
 		if(result != LuaUtils.Function_Stop && result != LuaUtils.Function_StopHScript && result != LuaUtils.Function_StopAll) callOnHScript('goodNoteHit', [note]);
+		spawnHoldSplashOnNote(note);
 		if(!note.isSustainNote) invalidateNote(note);
 	}
 	
@@ -3707,6 +3726,27 @@ class PlayState extends ScriptedState
 		}
 		return null;
 	}
+
+	public function spawnHoldSplashOnNote(note:Note)
+		{
+			if (ClientPrefs.data.holdSplashAlpha <= 0)
+				return;
+
+			if (note != null)
+			{
+				var strum:StrumNote = (note.mustPress ? playerStrums : opponentStrums).members[note.noteData];
+				if (strum != null && note.tail.length > 1)
+					spawnHoldSplash(note);
+			}
+		}
+
+	public function spawnHoldSplash(note:Note)
+		{
+			var end:Note = note.isSustainNote ? note.parent.tail[note.parent.tail.length - 1] : note.tail[note.tail.length - 1];
+			var splash:SustainSplash = grpHoldSplashes.recycle(SustainSplash);
+			splash.setupSusSplash((note.mustPress ? playerStrums : opponentStrums).members[note.noteData], note, playbackRate);
+			grpHoldSplashes.add(end.noteHoldSplash = splash);
+		}
 
 	/**
 	 * Spawns a note splash.
