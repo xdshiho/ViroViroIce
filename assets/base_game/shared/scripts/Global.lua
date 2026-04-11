@@ -25,9 +25,7 @@
 -- ===================================================
 
 function onCreatePost()
-    local sacripanta = getPropertyFromClass('backend.ClientPrefs', 'data.weekpixel')
-    
-    if sacripanta and (dadName == 'senpai' or dadName == 'senpai-angry' or dadName == 'spirit') then
+    if pixelRender and stageUI == 'pixel' then
         setProperty("camGame.pixelPerfectRender", true)
     end
 end
@@ -42,7 +40,7 @@ local penis = nil
 local mikudsidea = false
 
 function onCreatePost()
-    mikudsidea = getPropertyFromClass('backend.ClientPrefs', 'data.mikudside')
+    mikudsidea = allowMiku
 
     addCharacterToList('bf-miku', 'bf')
     makeLuaSprite('mikuon', 'game/playablemiku', 840, 0)

@@ -987,6 +987,15 @@ class PlayState extends ScriptedState
 		lua.set('gfName', gf != null ? gf.curCharacter : SONG.gfVersion);
 		
 		// Other settings
+		// nosso
+		lua.set('mechanics', ClientPrefs.data.mechanics);
+		lua.set('modchart', ClientPrefs.data.modchart);
+		lua.set('pixelRender', ClientPrefs.data.weekpixel);
+		lua.set('allowMiku', ClientPrefs.data.mikudside);
+		lua.set('extra', ClientPrefs.data.extra);
+		lua.set('stageUI', stageUI);
+		
+		// deles
 		lua.set('downscroll', ClientPrefs.data.downScroll);
 		lua.set('middlescroll', ClientPrefs.data.middleScroll);
 		lua.set('framerate', ClientPrefs.data.framerate);
