@@ -17,7 +17,7 @@ class ViroViroOptionsSubState extends baseOptionsSubState {
 			BOOL);
 		addOption(option);
 
-        var option:Option = new Option('Extra'
+        var option:Option = new Option('Extra',
 			'Eles estao de olho em nois da silva.',
 			'extra',
 			BOOL);
