@@ -12,6 +12,7 @@ import states.TitleState;
 // nosso
 	public var mechanics:Bool = true;
 	public var modchart:Bool = true;
+	public var weekpixel:Bool = true;
 	public var extra:Bool = false;
 // deles
 

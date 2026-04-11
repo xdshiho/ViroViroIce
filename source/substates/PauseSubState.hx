@@ -146,14 +146,26 @@ class PauseSubState extends ScriptedSubState
 		super.create();
 	}
 	
-	function getPauseSong()
+function getPauseSong()
 	{
+		if (backend.WeekData.getWeekFileName() == 'week6') // eu nsei oq eu tô fazendo mas parece certo SHIHO ME AJUDA
+		{
+			return 'breakfast-pixel'; //seguindo a minha lógica, supostamente ela vai pegar a musica aqui do breakfast pixel se for a week 6, ent to mt feliz se fuincionar FUNCIOUUUIUU
+		} // São 2:14 AM btw
 		var formattedSongName:String = (songName != null ? Paths.formatToSongPath(songName) : '');
 		var formattedPauseMusic:String = Paths.formatToSongPath(ClientPrefs.data.pauseMusic);
+		
 		if(formattedSongName == 'none' || (formattedSongName != 'none' && formattedPauseMusic == 'none')) return null;
 
 		return (formattedSongName != '') ? formattedSongName : formattedPauseMusic;
 	}
+
+
+	// ignora tava me sentindo claustrofóbica
+
+
+
+
 
 	var holdTime:Float = 0;
 	var cantUnpause:Float = 0.1;
