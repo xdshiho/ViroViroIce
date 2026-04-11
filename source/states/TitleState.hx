@@ -520,10 +520,10 @@ class TitleState extends ScriptedState
 						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 					case 1:
-						createCoolText(['Psych Engine by'], 40);
+						createCoolText(['ViroViroIce by'], 40);
 					case 3:
-						addMoreText('Shadow Mario', 40);
-						addMoreText('Riveren', 40);
+						addMoreText('mily_0', 40);
+						addMoreText('Shihoxd', 40);
 					case 4:
 						deleteCoolText();
 					case 5:
