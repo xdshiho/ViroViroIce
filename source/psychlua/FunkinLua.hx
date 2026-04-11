@@ -643,6 +643,230 @@ class FunkinLua {
 	public static function implement():Void {
 		var game:PlayState = PlayState.instance;
 		if (game != null) implementGame(game);
+
+		registerFunction("makeLuaBox", function(tag:String, tabs:Array<String>, defSelect:String, width:Int = 300, height:Int = 280, x:Float = 0, y:Float = 0) {
+			tag = tag.replace('.', '');
+			LuaUtils.destroyObject(tag);
+			var leBox = new PsychUIBox(x, y, width, height, tabs);
+			leBox.selectedName = defSelect;
+			MusicBeatState.getVariables().set(tag, leBox);
+		});
+
+		registerFunction("addLuaBox", function(tag:String, ?inFront:Bool = false) {
+			var myBox:PsychUIBox = MusicBeatState.getVariables().get(tag);
+
+			if(myBox == null) return;
+
+			var instance = LuaUtils.getTargetInstance();
+			if(inFront)
+				instance.add(myBox);
+			else
+			{
+				if(PlayState.instance == null || !PlayState.instance.isDead)
+					instance.insert(instance.members.indexOf(LuaUtils.getLowestCharacterGroup()), myBox);
+				else
+					GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), myBox);
+			}
+		});
+
+		registerFunction("makeLuaButton", function(tag:String, label:String = '', scaleX:Int = 100, scaleY:Int = 40, x:Float = 0, y:Float = 0) {
+			tag = tag.replace('.', '');
+			LuaUtils.destroyObject(tag);
+			var originalTag:String = tag;
+			var leButton = new PsychUIButton(x, y, label, function() game.callOnScripts('onButtonPressed', [originalTag], false, null, null), scaleX, scaleY);
+			MusicBeatState.getVariables().set(tag, leButton);
+		});
+
+		registerFunction("addLuaButton", function(tag:String, ?inFront:Bool = false) {
+			var myButton:PsychUIButton = MusicBeatState.getVariables().get(tag);
+
+			if(myButton == null) return;
+
+			var instance = LuaUtils.getTargetInstance();
+			if(inFront)
+				instance.add(myButton);
+			else
+			{
+				if(PlayState.instance == null || !PlayState.instance.isDead)
+					instance.insert(instance.members.indexOf(LuaUtils.getLowestCharacterGroup()), myButton);
+				else
+					GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), myButton);
+			}
+		});
+
+		registerFunction("addButtonToBox", function(tag:String, box:String, tab:String) {
+			var myObj:PsychUIButton = MusicBeatState.getVariables().get(tag);
+			
+			var myBox:PsychUIBox = MusicBeatState.getVariables().get(box);
+
+			if(myObj == null) return;
+
+			var instance = myBox.getTab(tab).menu;
+			instance.add(myObj);
+		});
+
+		registerFunction("makeLuaInputText", function(tag:String, input:String = '', size:Int = 8, width:Int = 0, x:Float = 0, y:Float = 0) {
+			tag = tag.replace('.', '');
+			LuaUtils.destroyObject(tag);
+			var leInput = new PsychUIInputText(x, y, width, input, size);
+			MusicBeatState.getVariables().set(tag, leInput);
+		});
+
+		registerFunction("addLuaInputText", function(tag:String, ?inFront:Bool = false) {
+			var myInput:PsychUIInputText = MusicBeatState.getVariables().get(tag);
+
+			if(myInput == null) return;
+
+			var instance = LuaUtils.getTargetInstance();
+			if(inFront)
+				instance.add(myInput);
+			else
+			{	
+				if(PlayState.instance == null || !PlayState.instance.isDead)
+					instance.insert(instance.members.indexOf(LuaUtils.getLowestCharacterGroup()), myInput);
+				else
+					GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), myInput);
+			}
+		});
+
+		registerFunction("addInputTextToBox", function(tag:String, box:String, tab:String) {
+			var myInput:PsychUIInputText = MusicBeatState.getVariables().get(tag);
+			var myBox:PsychUIBox = MusicBeatState.getVariables().get(box);
+
+			if(myInput == null) return;
+
+			var instance = myBox.getTab(tab).menu;
+			instance.add(myInput);
+		});
+
+		registerFunction("makeLuaSlider", function(tag:String, label:String = '', min:Float = 0.0, max:Float = 1.0, defValue:Float = 0.5, width:Int = 200, x:Float = 0, y:Float = 0) {
+			tag = tag.replace('.', '');
+			LuaUtils.destroyObject(tag);
+			var originalTag:String = tag;
+			var leSlider = new PsychUISlider(x, y, function(v:Float) game.callOnScripts('onSliderChanged', [originalTag, v], false, null, null), defValue, min, max, width);
+			leSlider.label = label;
+			MusicBeatState.getVariables().set(tag, leSlider);
+		});
+		
+		registerFunction("addLuaSlider", function(tag:String, ?inFront:Bool = false) {
+			var mySlider:PsychUISlider = MusicBeatState.getVariables().get(tag);
+
+			if(mySlider == null) return;
+
+			var instance = LuaUtils.getTargetInstance();
+			if(inFront)
+				instance.add(mySlider);
+			else
+			{
+				if(PlayState.instance == null || !PlayState.instance.isDead)
+					instance.insert(instance.members.indexOf(LuaUtils.getLowestCharacterGroup()), mySlider);
+				else
+					GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), mySlider);
+			}
+		});
+
+		registerFunction("addSliderToBox", function(tag:String, box:String, tab:String) {
+			var mySlider:PsychUISlider = MusicBeatState.getVariables().get(tag);
+			var myBox:PsychUIBox = MusicBeatState.getVariables().get(box);
+
+			if(mySlider == null) return;
+
+			var instance = myBox.getTab(tab).menu;
+			instance.add(mySlider);
+		});
+
+		registerFunction("makeLuaCheckBox", function(tag:String, label:String = '', checked:Bool, hitbox:Int = 100, x:Float = 0, y:Float = 0) {
+			tag = tag.replace('.', '');
+			LuaUtils.destroyObject(tag);
+			var originalTag:String = tag;
+			var leCheckBox = new PsychUICheckBox(x, y, label, hitbox, function() game.callOnScripts('onCheckBoxChecked', [originalTag], false, null, null));
+			leCheckBox.checked = checked;
+			MusicBeatState.getVariables().set(tag, leCheckBox);
+		});
+
+		registerFunction("addLuaCheckBox", function(tag:String, ?inFront:Bool = false) {
+			var myCheckBox:PsychUICheckBox = MusicBeatState.getVariables().get(tag);
+
+			if(myCheckBox == null) return;
+
+			var instance = LuaUtils.getTargetInstance();
+			if(inFront)
+				instance.add(myCheckBox);
+			else
+			{
+				if(PlayState.instance == null || !PlayState.instance.isDead)
+					instance.insert(instance.members.indexOf(LuaUtils.getLowestCharacterGroup()), myCheckBox);
+				else
+					GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), myCheckBox);
+			}
+		});
+
+		registerFunction("addCheckBoxToBox", function(tag:String, box:String, tab:String) {
+			var myCheckBox:PsychUICheckBox = MusicBeatState.getVariables().get(tag);
+			var myBox:PsychUIBox = MusicBeatState.getVariables().get(box);
+
+			if(myCheckBox == null) return;
+
+			var instance = myBox.getTab(tab).menu;
+			instance.add(myCheckBox);
+		});
+
+		registerFunction("makeLuaNumericStepper", function(tag:String, step:Float = 1, decimals:Int = 0, min:Float = -999, max:Float = 999, defValue:Float = 0, ?wid:Int = 60, x:Float = 0, y:Float = 0, ?isPercent:Bool = false) {
+			tag = tag.replace('.', '');
+			LuaUtils.destroyObject(tag);
+			var originalTag:String = tag;
+			var leNumStepper = new PsychUINumericStepper(x, y, step, defValue, min, max, decimals, wid, isPercent);
+			//leNumStepper.onValueChange = function() game.callOnScripts('onNumericStepperChange', [originalTag], false, null, null);
+			MusicBeatState.getVariables().set(tag, leNumStepper);
+		});
+
+		registerFunction("addLuaNumericStepper", function(tag:String, ?inFront:Bool = false) {
+			var myNumStepper:PsychUINumericStepper = MusicBeatState.getVariables().get(tag);
+
+			if(myNumStepper == null) return;
+
+			var instance = LuaUtils.getTargetInstance();
+			if(inFront)
+				instance.add(myNumStepper);
+			else
+			{
+				if(PlayState.instance == null || !PlayState.instance.isDead)
+					instance.insert(instance.members.indexOf(LuaUtils.getLowestCharacterGroup()), myNumStepper);
+				else
+					GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), myNumStepper);
+			}
+		});
+
+		registerFunction("addNumericStepperToBox", function(tag:String, box:String, tab:String) {
+			var myNumStepper:PsychUINumericStepper = MusicBeatState.getVariables().get(tag);
+			var myBox:PsychUIBox = MusicBeatState.getVariables().get(box);
+
+			if(myNumStepper == null) return;
+
+			var instance = myBox.getTab(tab).menu;
+			instance.add(myNumStepper);
+		});
+
+		registerFunction("getInputTextString", function(tag:String) {
+			var obj:PsychUIInputText = LuaUtils.getObjectDirectly(tag);
+			if(obj != null && obj.text != null)
+			{
+				return obj.text;
+			}
+			FunkinLua.luaTrace("getInputTextString: Object " + tag + " doesn't exist!", false, false, FlxColor.RED);
+			return null;
+		});
+
+		registerFunction("isInputTextOnFocus", function() {
+			if (PsychUIInputText.focusOn == null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		});
 		
 		registerFunction('debugPrint', function(?text:Dynamic, ?color:String) ScriptedState.debugPrint(text, color == null ? null : CoolUtil.colorFromString(color)));
 

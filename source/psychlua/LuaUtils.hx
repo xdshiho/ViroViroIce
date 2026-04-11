@@ -111,6 +111,44 @@ class LuaUtils
 		#end
 		return null;
 	}
+
+	public static function getVarInArray(instance:Dynamic, variable:String, allowMaps:Bool = false):Any
+	{
+		var splitProps:Array<String> = variable.split('[');
+		if(splitProps.length > 1)
+		{
+			var target:Dynamic = null;
+			if(MusicBeatState.getVariables().exists(splitProps[0]))
+			{
+				var retVal:Dynamic = MusicBeatState.getVariables().get(splitProps[0]);
+				if(retVal != null)
+					target = retVal;
+			}
+			else
+				target = Reflect.getProperty(instance, splitProps[0]);
+
+			for (i in 1...splitProps.length)
+			{
+				var j:Dynamic = splitProps[i].substr(0, splitProps[i].length - 1);
+				target = target[j];
+			}
+			return target;
+		}
+		
+		if(allowMaps && isMap(instance))
+		{
+			//trace(instance);
+			return instance.get(variable);
+		}
+
+		if(MusicBeatState.getVariables().exists(variable))
+		{
+			var retVal:Dynamic = MusicBeatState.getVariables().get(variable);
+			if(retVal != null)
+				return retVal;
+		}
+		return Reflect.getProperty(instance, variable);
+	}
 	
 	static function isQuote(string:String, pos:Int):Bool { // it isnt that deep bro
 		var char:String = string.charAt(pos);
