@@ -1,6 +1,7 @@
 package options;
 
-class ViroViroOptionsSubState extends baseOptionsMenu {
+class ViroViroOptionsSubState extends BaseOptionsMenu
+{
     public function new() {
         super(Language.getPhrase('vvie_menu', 'Engine Settings'), 'Engine Settings Menu');
 		
