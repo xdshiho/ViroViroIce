@@ -38,6 +38,20 @@ class Spooky extends BaseStage
 
 	var lightningStrikeBeat:Int = 0;
 	var lightningOffset:Int = 8;
+
+	override function stepHit()
+	{
+		if (curStep == 16) // PORRA DE ")" VASSEFUDÊ O LINGUAGEM BCT
+		{
+			switch(songName)
+			{
+				case 'spookeez':
+					lightningStrikeShit(); // hardcoded é fd
+			}
+			
+		}
+	}
+
 	override function beatHit()
 	{
 		if (FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
