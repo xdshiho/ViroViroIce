@@ -71,7 +71,7 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 		
-		appName = (FlxG.stage.application.meta.get('file') ?? 'PsychEngineMint');
+		appName = (FlxG.stage.application.meta.get('file') ?? 'ViroViroIce');
 		
 		#if (cpp && windows)
 		backend.Native.fixScaling();
