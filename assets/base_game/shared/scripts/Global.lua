@@ -20,11 +20,15 @@
   here you can uhmmmm well, change stuff that happens on the songs, not exactly on the menus or anything but... you get it.
 
 ]]
+function onCreatePost()
+    pixelRender_createPost()
+    miku_createPost()
+end
 -- ===================================================
 -- WEEK 6 EFFECT (YOU CAN ADD YOUR OWN SONGS HERE!!)
 -- ===================================================
 
-function onCreatePost()
+function pixelRender_createPost()
     if pixelRender and stageUI == 'pixel' then
         setProperty("camGame.pixelPerfectRender", true)
     end
@@ -39,7 +43,7 @@ local oldAssFreak = nil
 local penis = nil
 local mikudsidea = false
 
-function onCreatePost()
+function miku_createPost()
     mikudsidea = allowMiku
 
     addCharacterToList('bf-miku', 'bf')
@@ -62,7 +66,7 @@ function onUpdate(elapsed)
         return
     end
 
-    if getPropertyFromClass('flixel.FlxG', 'keys.justPressed.M') then
+    if getPropertyFromClass('flixel.FlxG', 'keys.justPressed.M') and stageUI ~= 'pixel' then
         
         if not mikutrue then
             oldAssFreak = getProperty('boyfriend.curCharacter')
