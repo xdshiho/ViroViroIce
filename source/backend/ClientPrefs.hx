@@ -13,6 +13,7 @@ import states.TitleState;
 	public var mechanics:Bool = true;
 	public var modchart:Bool = true;
 	public var weekpixel:Bool = true;
+	public var mikudside:Bool = false;
 	public var extra:Bool = false;
 // deles
 

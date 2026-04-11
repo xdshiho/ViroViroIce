@@ -1,148 +1,148 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [-5, 0],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "BF idle dance"
+			"fps": 24,
+			"name": "BF idle dance",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [109, -51],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "BF NOTE LEFT0"
+			"fps": 24,
+			"name": "BF NOTE LEFT0",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-40, -25],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "BF NOTE DOWN0"
+			"fps": 24,
+			"name": "BF NOTE DOWN0",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-10, -1],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "BF NOTE UP0"
+			"fps": 24,
+			"name": "BF NOTE UP0",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-155, 0],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "BF NOTE RIGHT0"
+			"fps": 24,
+			"name": "BF NOTE RIGHT0",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [123, -74],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFTmiss",
-			"indices": [],
-			"name": "BF NOTE LEFT MISS"
+			"fps": 24,
+			"name": "BF NOTE LEFT MISS",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-25, -24],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "BF NOTE DOWN MISS"
+			"fps": 24,
+			"name": "BF NOTE DOWN MISS",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-7, 1],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUPmiss",
-			"indices": [],
-			"name": "BF NOTE UP MISS"
+			"fps": 24,
+			"name": "BF NOTE UP MISS",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-163, 5],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHTmiss",
-			"indices": [],
-			"name": "BF NOTE RIGHT MISS"
+			"fps": 24,
+			"name": "BF NOTE RIGHT MISS",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-14, 7],
-			"loop": false,
-			"fps": 24,
 			"anim": "hey",
-			"indices": [],
-			"name": "BF HEY"
+			"fps": 24,
+			"name": "BF HEY",
+			"indices": []
 		},
 		{
+			"loop": true,
 			"offsets": [-7, -6],
-			"loop": true,
-			"fps": 24,
 			"anim": "scared",
-			"indices": [],
-			"name": "BF idle shaking"
+			"fps": 24,
+			"name": "BF idle shaking",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [156, 250],
-			"loop": false,
-			"fps": 24,
 			"anim": "firstDeath",
-			"indices": [],
-			"name": "BF dies"
+			"fps": 24,
+			"name": "BF dies",
+			"indices": []
 		},
 		{
-			"offsets": [75, 280],
 			"loop": true,
-			"fps": 24,
+			"offsets": [75, 280],
 			"anim": "deathLoop",
-			"indices": [],
-			"name": "BF Dead Loop"
+			"fps": 24,
+			"name": "BF Dead Loop",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [149, 343],
-			"loop": false,
-			"fps": 24,
 			"anim": "deathConfirm",
-			"indices": [],
-			"name": "BF Dead confirm"
+			"fps": 24,
+			"name": "BF Dead confirm",
+			"indices": []
 		},
 		{
-			"loop": false,
 			"offsets": [-14, -70],
+			"loop": false,
+			"fps": 24,
 			"anim": "Dodge down",
-			"fps": 24,
-			"name": "BF NOTE DOWN DODGE",
-			"indices": []
+			"indices": [],
+			"name": "BF NOTE DOWN DODGE"
 		},
 		{
-			"loop": false,
 			"offsets": [91, -12],
+			"loop": false,
+			"fps": 24,
 			"anim": "Dodge left",
-			"fps": 24,
-			"name": "BF NOTE LEFT DODGE",
-			"indices": []
+			"indices": [],
+			"name": "BF NOTE LEFT DODGE"
 		},
 		{
-			"loop": false,
 			"offsets": [3, 23],
-			"anim": "Dodge up",
+			"loop": false,
 			"fps": 24,
-			"name": "BF NOTE UP DODGE",
-			"indices": []
+			"anim": "Dodge up",
+			"indices": [],
+			"name": "BF NOTE UP DODGE"
 		},
 		{
-			"loop": false,
 			"offsets": [53, -22],
-			"anim": "Dodge right",
+			"loop": false,
 			"fps": 24,
-			"name": "BF NOTE RIGHT DODGE",
-			"indices": []
+			"anim": "Dodge right",
+			"indices": [],
+			"name": "BF NOTE RIGHT DODGE"
 		}
 	],
 	"vocals_file": "",
@@ -152,7 +152,7 @@
 	"healthicon": "miku",
 	"flip_x": true,
 	"healthbar_colors": [148, 97, 206],
-	"camera_position": [0, -100],
+	"camera_position": [120, -100],
 	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": true

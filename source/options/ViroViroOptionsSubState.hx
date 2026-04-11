@@ -24,6 +24,12 @@ class ViroViroOptionsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
+		var option:Option = new Option('no Miku D-sides',
+			'Disables the cool Miku easter egg when pressing "M". :(',
+			'mikudside',
+			BOOL);
+		addOption(option);
+
         var option:Option = new Option('Extra',
 			'Eles estao de olho em nois da silva.',
 			'extra',

@@ -39,9 +39,11 @@ end
 local mikutrue = false
 local oldAssFreak = nil
 local penis = nil
-
+local mikudsidea = false
 
 function onCreatePost()
+    mikudsidea = getPropertyFromClass('backend.ClientPrefs', 'data.mikudside')
+
     addCharacterToList('bf-miku', 'bf')
     makeLuaSprite('mikuon', 'game/playablemiku', 840, 0)
     setObjectCamera('mikuon', 'hud')
@@ -57,6 +59,10 @@ function onCreatePost()
 end
 
 function onUpdate(elapsed)
+
+    if mikudsidea then
+        return
+    end
 
     if getPropertyFromClass('flixel.FlxG', 'keys.justPressed.M') then
         
