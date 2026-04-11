@@ -1,6 +1,7 @@
 package options;
 
-class ViroViroOptionsSubState extends baseOptionsSubState {
+class ViroViroOptionsSubState extends BaseOptionsMenu
+{
     public function new() {
         super(Language.getPhrase('vvie_menu', 'Engine Settings'), 'Engine Settings Menu');
 		
@@ -17,7 +18,7 @@ class ViroViroOptionsSubState extends baseOptionsSubState {
 			BOOL);
 		addOption(option);
 
-        var option:Option = new Option('Extra'
+        var option:Option = new Option('Extra',
 			'Eles estao de olho em nois da silva.',
 			'extra',
 			BOOL);
