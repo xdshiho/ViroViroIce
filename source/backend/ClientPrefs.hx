@@ -8,6 +8,13 @@ import states.TitleState;
 
 // Add a variable here and it will get automatically saved
 @:structInit class SaveVariables {
+
+// nosso
+	public var mechanics:Bool = true;
+	public var modchart:Bool = true;
+	public var extra:Bool = false;
+// deles
+
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;

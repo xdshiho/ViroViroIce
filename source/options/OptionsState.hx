@@ -11,7 +11,8 @@ class OptionsState extends ScriptedState
 		'Delay and Combo',
 		'Graphics',
 		'Visuals',
-		'Gameplay'
+		'Gameplay',
+		'VVIE'
 		#if TRANSLATIONS_ALLOWED , 'Language' #end
 	];
 	private static var curSelected:Int = 0;
@@ -39,6 +40,7 @@ class OptionsState extends ScriptedState
 		optionFunctions['Visuals'] = () -> openSubState(new options.VisualsSettingsSubState());
 		optionFunctions['Gameplay'] = () -> openSubState(new options.GameplaySettingsSubState());
 		optionFunctions['Delay and Combo'] = () -> MusicBeatState.switchState(new options.NoteOffsetState());
+		optionFunctions['VVIE'] = () -> openSubState(new options.ViroViroOptionsSubState());
 		optionFunctions['Language'] = () -> openSubState(new options.LanguageSubState());
 		
 		rpcDetails = 'Options Menu';

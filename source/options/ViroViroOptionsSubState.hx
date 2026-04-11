@@ -1,0 +1,27 @@
+package options;
+
+class ViroViroOptionsSubState extends baseOptionsSubState {
+    public function new() {
+        super(Language.getPhrase('vvie_menu', 'Engine Settings'), 'Engine Settings Menu');
+		
+
+		var option:Option = new Option('Mechanics',
+			'Enables mechanics.',
+			'mechanics',
+			BOOL);
+		addOption(option);
+
+        var option:Option = new Option('Modchart',
+			'Enables modchart.',
+			'modchart',
+			BOOL);
+		addOption(option);
+
+        var option:Option = new Option('Extra'
+			'Eles estao de olho em nois da silva.',
+			'extra',
+			BOOL);
+		addOption(option);
+
+    }
+}
