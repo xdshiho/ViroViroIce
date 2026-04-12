@@ -775,7 +775,7 @@ class FunkinLua {
 			instance.add(mySlider);
 		});
 
-		registerFunction("makeLuaCheckBox", function(tag:String, label:String = '', checked:Bool, hitbox:Int = 100, x:Float = 0, y:Float = 0) {
+		registerFunction("makeLuaCheckBox", function(tag:String, label:String = '', checked:Bool = false, hitbox:Int = 100, x:Float = 0, y:Float = 0) {
 			tag = tag.replace('.', '');
 			LuaUtils.destroyObject(tag);
 			var originalTag:String = tag;

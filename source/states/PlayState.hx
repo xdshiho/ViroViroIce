@@ -637,17 +637,19 @@ class PlayState extends ScriptedState
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
 
 		switch (curStage) {
-			case 'stage': new StageWeek1(); 			//Week 1
-			case 'spooky': new Spooky();				//Week 2
-			case 'philly': new Philly();				//Week 3
-			case 'limo': new Limo();					//Week 4
-			case 'mall': new Mall();					//Week 5 - Cocoa, Eggnog
-			case 'mallEvil': new MallEvil();			//Week 5 - Winter Horrorland
-			case 'school': new School();				//Week 6 - Senpai, Roses
-			case 'schoolEvil': new SchoolEvil();		//Week 6 - Thorns
-			case 'tank': new Tank();					//Week 7 - Ugh, Guns, Stress
-			case 'phillyStreets': new PhillyStreets(); 	//Weekend 1 - Darnell, Lit Up, 2Hot
-			case 'phillyBlazin': new PhillyBlazin();	//Weekend 1 - Blazin
+			case 'stage': new StageWeek1(); 						//Week 1
+			case 'spooky': new Spooky();							//Week 2
+			case 'philly': new Philly();							//Week 3
+			case 'limo': new Limo();								//Week 4
+			case 'mall': new Mall();								//Week 5 - Cocoa, Eggnog
+			case 'mallEvil': new MallEvil();						//Week 5 - Winter Horrorland
+			case 'school': new School();							//Week 6 - Senpai, Roses
+			case 'schoolEvil': new SchoolEvil();					//Week 6 - Thorns
+			case 'tank': new Tank();								//Week 7 - Ugh, Guns, Stress
+			case 'phillyStreets': new PhillyStreets(); 				//Weekend 1 - Darnell, Lit Up, 2Hot
+			case 'phillyBlazin': new PhillyBlazin();				//Weekend 1 - Blazin
+			case 'mallErect': new MallErect();						//Week 5 (Erect) - Cocoa Erect, Eggnog Erect, Cocoa (Pico Mix), Eggnog (Pico Mix)
+			case 'phillyStreetsErect': new PhillyStreetsErect(); 	//Weekend 1 (Erect) - Darnell Erect, Darnell (BF Mix), Lit Up (BF Mix)
 			default: new BaseStage();
 		}
 		if(isPixelStage) introSoundsSuffix = '-pixel';
