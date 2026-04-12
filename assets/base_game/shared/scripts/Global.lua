@@ -84,7 +84,7 @@ function onUpdate(elapsed)
             triggerEvent('Change Character', 'bf', oldAssFreak or 'bf')
             setPropertyFromClass('openfl.Lib', 'application.window.title', penis or 'Friday Night Funkin\': ViroViroIce')
             doTweenAngle('thumbs1up', 'iconP1', 0, 1, 'elasticOut') -- 🔥
-
+            playSound('ouch', 1.3)
             mikutrue = false
         end
     end

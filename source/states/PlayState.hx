@@ -99,6 +99,7 @@ class PlayState extends ScriptedState
 	 * Map containing all precached characters the speakers (middle) character will change to (with the Change Character event).
 	*/
 	public var gfMap:Map<String, Character> = new Map<String, Character>();
+	
 
 	var BF_X:Float = 770;
 	var BF_Y:Float = 100;
@@ -649,7 +650,7 @@ class PlayState extends ScriptedState
 			case 'phillyStreets': new PhillyStreets(); 				//Weekend 1 - Darnell, Lit Up, 2Hot
 			case 'phillyBlazin': new PhillyBlazin();				//Weekend 1 - Blazin
 			case 'mallErect': new MallErect();						//Week 5 (Erect) - Cocoa Erect, Eggnog Erect, Cocoa (Pico Mix), Eggnog (Pico Mix)
-			case 'phillyStreetsErect': new PhillyStreetsErect(); 	//Weekend 1 (Erect) - Darnell Erect, Darnell (BF Mix), Lit Up (BF Mix)
+			case 'phillyStreetsErect': new PhillyStreetsErect(); 	//Weekend 1 (Erect) - Darnell Erect, Darnell (BF Mix), Lit Up (BF Mix) // se mata shiho te amo
 			default: new BaseStage();
 		}
 		if(isPixelStage) introSoundsSuffix = '-pixel';
@@ -1753,6 +1754,7 @@ class PlayState extends ScriptedState
 
 	@:dox(hide) private function generateSong():Void
 	{
+
 		// FlxG.log.add(ChartParser.parse());
 		songSpeed = PlayState.SONG.speed;
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype');
@@ -2824,6 +2826,30 @@ class PlayState extends ScriptedState
 							}
 						});
 				}
+
+			case 'Change Scroll Speed GOOD':
+				if (songSpeedType != "constant")
+					{
+						if(flValue1 == null) flValue1 = 1;
+						if(flValue2 == null) flValue2 = 0;
+
+						var newValue:Float = flValue1;
+
+						if(flValue2 <= 0)
+						{
+							songSpeed = newValue;
+						}
+						else
+						{
+							songSpeedTween = FlxTween.tween(this, {songSpeed: newValue}, flValue2 / playbackRate, {
+								ease: FlxEase.linear,
+								onComplete: function (twn:FlxTween)
+								{
+									songSpeedTween = null;
+								}
+							});
+						}
+					}
 
 			case 'Set Property':
 				try {
