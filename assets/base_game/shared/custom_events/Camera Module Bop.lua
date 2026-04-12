@@ -1,4 +1,5 @@
 -- Oxi, sai daqui djabo
+-- tá bom desculpa https://pbs.twimg.com/media/F5q6lGLXcAAMQsx?format=jpg&name=small
 
 local bopÉREAL = false
 local bopNum = 1
