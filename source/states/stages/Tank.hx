@@ -1,5 +1,5 @@
 package states.stages;
-
+// shiho oq ce fez aqui
 import states.stages.objects.*;
 import cutscenes.CutsceneHandler;
 import substates.GameOverSubstate;
