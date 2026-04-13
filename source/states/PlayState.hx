@@ -1618,10 +1618,11 @@ class PlayState extends ScriptedState
 	*/
 	public dynamic function fullComboFunction()
 	{
-		var sicks:Int = ratingsData[0].hits;
-		var goods:Int = (ratingsData[1]?.hits ?? 0);
-		var bads:Int = (ratingsData[2]?.hits ?? 0);
-		var shits:Int = (ratingsData[3]?.hits ?? 0);
+		var neats:Int = ratingsData[0].hits;
+		var sicks:Int = (ratingsData[1].hits ?? 0);
+		var goods:Int = (ratingsData[2]?.hits ?? 0);
+		var bads:Int = (ratingsData[3]?.hits ?? 0);
+		var shits:Int = (ratingsData[4]?.hits ?? 0);
 
 		ratingFC = "";
 		if(songMisses == 0)
@@ -1629,6 +1630,7 @@ class PlayState extends ScriptedState
 			if (bads > 0 || shits > 0) ratingFC = 'FC';
 			else if (goods > 0) ratingFC = 'GFC';
 			else if (sicks > 0) ratingFC = 'SFC';
+			else if (neats > 0) ratingFC = 'NFC';
 		}
 		else {
 			if (songMisses < 10) ratingFC = 'SDCB';

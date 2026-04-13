@@ -117,12 +117,6 @@
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
-	<haxedef name="FM_ENGINE" value="PSYCH"/>
-	<haxedef name="FM_ENGINE_VERSION" value="1.0"/>
-
-	<haxelib name="funkin-modchart" />
-	<haxeflag name="--macro" value="modchart.backend.macros.Macro.includeFiles()"/>
-
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="tjson" />
@@ -137,6 +131,12 @@
 	<!-- Other -->
 	<haxelib name="grig.audio" />
 	<haxelib name="funkin.vis" />
+
+	<haxedef name="FM_ENGINE" value="PSYCH"/>
+	<haxedef name="FM_ENGINE_VERSION" value="1.0"/>
+
+	<haxelib name="funkin-modchart" />
+	<haxeflag name="--macro" value="modchart.backend.macros.Macro.includeFiles()"/>
 
 	<!-- Disable Discord IO Thread -->
 	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />

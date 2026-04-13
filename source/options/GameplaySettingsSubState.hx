@@ -71,6 +71,17 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 30;
 		addOption(option);
 
+		var option:Option = new Option('Neat!!! Hit Window',
+			'Changes the amount of time you have\nfor hitting a "Neat!!!" in milliseconds.',
+			'neatWindow',
+			FLOAT);
+		option.displayFormat = '%vms';
+		option.scrollSpeed = 10;
+		option.minValue = 5.0;
+		option.maxValue = 15.0;
+		option.changeValue = 0.1;
+		addOption(option);
+
 		var option:Option = new Option('Sick! Hit Window',
 			'Changes the amount of time you have\nfor hitting a "Sick!" in milliseconds.',
 			'sickWindow',

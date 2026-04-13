@@ -97,7 +97,8 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Change Scroll Speed GOOD', "Value 1: Scroll Speed\nValue 2: Time it takes to change fully in seconds."],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
-		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"]
+		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"],
+		['==== [Soft Coded Events] ====]', "These events are only used for organizational purposes, they don't actually do anything."]
 	];
 	
 	public static var instance:ChartingState = null;

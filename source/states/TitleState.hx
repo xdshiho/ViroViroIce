@@ -523,7 +523,7 @@ class TitleState extends ScriptedState
 						createCoolText(['ViroViroIce by'], 40);
 					case 3:
 						addMoreText('mily_0', 40);
-						addMoreText('Shihoxd', 40);
+						addMoreText('xdShiho', 40); // fui burra
 					case 4:
 						deleteCoolText();
 					case 5:

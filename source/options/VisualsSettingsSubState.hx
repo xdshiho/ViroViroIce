@@ -99,7 +99,7 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			"What should the Time Bar display?",
 			'timeBarType',
 			STRING,
-			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
+			['Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
@@ -113,13 +113,6 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			'camZooms',
 			BOOL,
 			'camera_zooms');
-		addOption(option);
-
-		var option:Option = new Option('Score Text Pulse',
-			"If checked, the score display will pulse for every note hit.",
-			'scoreZoom',
-			BOOL,
-			'score_text_grow_on_hit');
 		addOption(option);
 
 		var option:Option = new Option('Health Bar Opacity',
