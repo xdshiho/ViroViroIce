@@ -16,8 +16,8 @@ enum abstract MainMenuColumn(String) to String {
 
 class MainMenuState extends ScriptedState
 {
-	public static var psychEngineVersion:String = '1.0.4';
-	public static var modVersion = '0.0.5';
+	public static var psychEngineVersion:String = '0.0.5';
+	public static var modVersion = '0.1.6';
 	public static var curSelected:Int = 0;
 	public static var curColumn:MainMenuColumn = CENTER;
 	var allowMouse:Bool = true; //Turn this off to block mouse movement in menus
@@ -106,11 +106,11 @@ class MainMenuState extends ScriptedState
 		for (option in optionShit)
 			addMenuItem(option);
 
-		emiVer = new FlxText(12, FlxG.height - 24, 0, 'Built on Psych Engine $psychEngineVersion', 11);
+		emiVer = new FlxText(12, FlxG.height - 24, 0, 'Built on Psych Engine Mint $psychEngineVersion', 11);
 		emiVer.scrollFactor.set();
 		emiVer.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(emiVer);
-		psychVer = new FlxText(12, FlxG.height - 40, 0, 'Psych Engine Mint $modVersion', 12);
+		psychVer = new FlxText(12, FlxG.height - 40, 0, 'ViroViroIce $modVersion', 12);
 		psychVer.scrollFactor.set();
 		psychVer.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(psychVer);

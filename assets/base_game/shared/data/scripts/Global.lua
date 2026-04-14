@@ -210,8 +210,8 @@ function remixesPorra(name)
         '(erect)',
         ' nightmare',
         '-nightmare',
-        '(nightmare)'--,
-        --'-twist' (tava testando num port de arrow funk)
+        '(nightmare)',
+        '-twist'
     }
 
     local lowered = string.lower(name)

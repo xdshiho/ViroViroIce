@@ -3326,10 +3326,10 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 		if(eventDropDown != null)
 		{
 			eventsList = [];
-			var eventFiles:Array<String> = loadFileList('custom_events/', ['.txt']);
+			var eventFiles:Array<String> = loadFileList('data/events/', ['.txt']);
 			for (file in eventFiles)
 			{
-				var desc:String = Paths.getTextFromFile('custom_events/$file.txt');
+				var desc:String = Paths.getTextFromFile('data/events/$file.txt');
 				eventsList.push([file, desc]);
 			}
 
@@ -3357,7 +3357,7 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 			var exts:Array<String> = ['.txt'];
 			#if LUA_ALLOWED exts.push('.lua'); #end
 			#if HSCRIPT_ALLOWED exts.push('.hx'); #end
-			noteTypes = loadFileList('custom_notetypes/', exts);
+			noteTypes = loadFileList('data/notetypes/', exts);
 			for (id => noteType in Note.defaultNoteTypes)
 				if(!noteTypes.contains(noteType))
 					noteTypes.insert(id, noteType);
@@ -3524,7 +3524,7 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 			}
 			
 			var eventsChart:SwagSong = PlayState.EVENTS;
-			if (autoLoadEvents) eventsChart = try { Song.getChart('events', cur); } catch (e) { null; }
+			if (autoLoadEvents) eventsChart = try { Song.getChart('events', cur, 'events'); } catch (e) { null; }
 			
 			var func:Void->Void = function()
 			{
@@ -3675,7 +3675,7 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 						Song.loadedSongName = cur;
 						
 						var eventsChart:SwagSong = PlayState.EVENTS;
-						if (autoLoadEvents) eventsChart = try { Song.getChart('events', cur); } catch (e) { null; }
+						if (autoLoadEvents) eventsChart = try { Song.getChart('events', cur, 'events'); } catch (e) { null; }
 						
 						loadChart(loadedChart, eventsChart);
 						Song.chartPath = fileDialog.path;
@@ -3941,7 +3941,7 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 						var reloadedChart:SwagSong = Song.parseJSON(Paths.getTextFromFile(Song.chartPath));
 						
 						var eventsChart:SwagSong = PlayState.EVENTS;
-						if (autoLoadEvents) eventsChart = try { Song.getChart('events', Song.chartPath); } catch (e) { null; }
+						if (autoLoadEvents) eventsChart = try { Song.getChart('events', Song.chartPath, 'events'); } catch (e) { null; }
 						
 						loadChart(reloadedChart, eventsChart);
 						reloadNotesDropdowns();
@@ -4115,7 +4115,7 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 										else trace('File not found: $chartToFind');
 									}
 									
-									var chartToFind:String = parentFolder + 'events.json';
+									var chartToFind:String = parentFolder + 'events/events.json';
 									if(FileSystem.exists(chartToFind))
 									{
 										var eventsChart:SwagSong = Song.parseJSON(Paths.getTextFromFile(chartToFind), 'events');
@@ -4268,7 +4268,7 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 	
 									if(pack.events != null)
 									{
-										overwriteCheck(path + 'events.json', 'events.json', PsychJsonPrinter.print(pack.events, ['events']), function()
+										overwriteCheck(path + 'events/events.json', 'events/events.json', PsychJsonPrinter.print(pack.events, ['events']), function()
 										{
 											if(overwriteSavedSomething)
 												showOutput('Files saved successfully to: ${fileDialog.path}!');
