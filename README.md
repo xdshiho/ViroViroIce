@@ -1,3 +1,10 @@
+hi Ashley, your engine is really good i love it!
+
+this is just a fork of Psych Engine Mint soooo go support the engine!
+
+
+
+
 # Friday Night Funkin': Psych Engine Mint
 
 ![Logo](docs/img/PsychEngineMint.png)
