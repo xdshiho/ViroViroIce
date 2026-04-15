@@ -228,7 +228,7 @@ function getPauseSong()
 			if (callOnScripts('onAccept', [grpMenuShit.members[curSelected].text, curSelected], true) != psychlua.LuaUtils.Function_Stop) {
 				if (menuItems == difficultyChoices)
 				{
-					var songLowercase:String = Paths.formatToSongPath(PlayState.SONG.song);
+					var songLowercase:String = Paths.formatToSongPath(Song.loadedSongName != null ? Song.loadedSongName : PlayState.SONG.song);
 					var poop:String = Highscore.formatSong(songLowercase, curSelected);
 					try
 					{
