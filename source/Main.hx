@@ -21,6 +21,9 @@ import states.TitleState;
 import psychlua.GlobalScriptHandler;
 import psychlua.HScript;
 
+import openfl.events.KeyboardEvent;
+import openfl.ui.Keyboard;
+
 #if (linux || mac)
 import lime.graphics.Image;
 #end
@@ -157,8 +160,18 @@ class Main extends Sprite
 			if (FlxG.game != null)
 			resetSpriteCache(FlxG.game);
 		});
+
+		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 	}
 	
+	function onKeyPress(e:KeyboardEvent):Void
+{
+    if (e.keyCode == Keyboard.F11)
+    {
+        Lib.application.window.fullscreen = !Lib.application.window.fullscreen; // resquícios diretos da Cool as Ice Engine.
+    }
+}
+
 	static function resetSpriteCache(sprite:Sprite):Void {
 		@:privateAccess {
 		        sprite.__cacheBitmap = null;
