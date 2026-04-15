@@ -6,6 +6,7 @@ import objects.Character;
 
 import states.MainMenuState;
 import states.FreeplayState;
+import psychlua.CustomState;
 
 class MasterEditorMenu extends ScriptedSubState
 {
@@ -17,7 +18,8 @@ class MasterEditorMenu extends ScriptedSubState
 		'Menu Character Editor',
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
-		'Note Splash Editor'
+		'Note Splash Editor',
+		'PE To VVIE Conversor'
 	];
 	var optionFunctions:Map<String, Void -> Void> = [];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
@@ -71,6 +73,7 @@ class MasterEditorMenu extends ScriptedSubState
 		optionFunctions['Dialogue Editor'] = () -> LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 		optionFunctions['Dialogue Portrait Editor'] = () -> LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
 		optionFunctions['Note Splash Editor'] =  () -> MusicBeatState.switchState(new NoteSplashEditorState());
+		optionFunctions['PE To VVIE Conversor'] =  () -> MusicBeatState.switchState(new CustomState('ModConversor'));
 		
 		#if MODS_ALLOWED
 		textBG = new FlxSprite(0, FlxG.height - 42).makeGraphic(FlxG.width, 42, 0xFF000000);

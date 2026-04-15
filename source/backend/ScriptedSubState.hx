@@ -47,7 +47,7 @@ class ScriptedSubState extends MusicBeatSubstate {
 	var loadedScripts:Bool = false;
 	
 	public var data:Dynamic = null;
-	public var scriptFolder:String = 'scripts';
+	public var scriptFolder:String = 'data/scripts';
 	
 	public function new(?data:Dynamic) {
 		super();
@@ -221,7 +221,7 @@ class ScriptedSubState extends MusicBeatSubstate {
 			var prefix:String = getFolderName();
 			if (prefix.length > 0) prefix += '/';
 			
-			var file:String = 'scripts/$prefix${customStateName()}.lua';
+			var file:String = 'data/scripts/$prefix${customStateName()}.lua';
 			var path:String = Paths.modFolders(file);
 			if (FileSystem.exists(path))
 				loaded = (initLuaScript(path) != null);

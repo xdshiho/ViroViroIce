@@ -7,7 +7,7 @@ class CoolUtil
 {
 	public static function checkForUpdates(url:String = null):String {
 		if (url == null || url.length == 0)
-			url = "https://raw.githubusercontent.com/inky03/FNF-PsychEngine/mod/gitVersion.txt";
+			url = "https://raw.githubusercontent.com/xdshiho/ViroViroIce/mod/gitVersion.txt";
 		var version:String = states.MainMenuState.modVersion.trim();
 		if(ClientPrefs.data.checkForUpdates) {
 			trace('checking for updates...');
