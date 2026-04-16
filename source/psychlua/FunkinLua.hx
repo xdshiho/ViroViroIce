@@ -644,6 +644,10 @@ class FunkinLua {
 		var game:PlayState = PlayState.instance;
 		if (game != null) implementGame(game);
 
+		var st:ScriptedSubState = null;
+		if (FlxG.state is ScriptedSubState)
+			st = cast FlxG.state;
+
 		registerFunction("createLabel", function(spr:String, txt:String, box:String, tab:String){
 			if (box != null && tab != null)
 			{
@@ -705,7 +709,7 @@ class FunkinLua {
 			tag = tag.replace('.', '');
 			LuaUtils.destroyObject(tag);
 			var originalTag:String = tag;
-			var leButton = new PsychUIButton(x, y, label, function() game.callOnScripts('onButtonPressed', [originalTag], false, null, null), scaleX, scaleY);
+			var leButton = new PsychUIButton(x, y, label, function() st.callOnScripts('onButtonPressed', [originalTag], false, null, null), scaleX, scaleY);
 			MusicBeatState.getVariables().set(tag, leButton);
 		});
 
@@ -775,7 +779,7 @@ class FunkinLua {
 			tag = tag.replace('.', '');
 			LuaUtils.destroyObject(tag);
 			var originalTag:String = tag;
-			var leSlider = new PsychUISlider(x, y, function(v:Float) game.callOnScripts('onSliderChanged', [originalTag, v], false, null, null), defValue, min, max, width);
+			var leSlider = new PsychUISlider(x, y, function(v:Float) st.callOnScripts('onSliderChanged', [originalTag, v], false, null, null), defValue, min, max, width);
 			leSlider.label = label;
 			MusicBeatState.getVariables().set(tag, leSlider);
 		});
@@ -811,7 +815,7 @@ class FunkinLua {
 			tag = tag.replace('.', '');
 			LuaUtils.destroyObject(tag);
 			var originalTag:String = tag;
-			var leCheckBox = new PsychUICheckBox(x, y, label, hitbox, function() game.callOnScripts('onCheckBoxChecked', [originalTag, MusicBeatState.getVariables().get(originalTag).checked], false, null, null));
+			var leCheckBox = new PsychUICheckBox(x, y, label, hitbox, function() st.callOnScripts('onCheckBoxChecked', [originalTag, MusicBeatState.getVariables().get(originalTag).checked], false, null, null));
 			leCheckBox.checked = checked;
 			MusicBeatState.getVariables().set(tag, leCheckBox);
 		});
@@ -848,7 +852,7 @@ class FunkinLua {
 			LuaUtils.destroyObject(tag);
 			var originalTag:String = tag;
 			var leNumStepper = new PsychUINumericStepper(x, y, step, defValue, min, max, decimals, wid, isPercent);
-			leNumStepper.onValueChange = function() {game.callOnScripts('onNumericStepperChange', [originalTag], false, null, null);}
+			leNumStepper.onValueChange = function() {st.callOnScripts('onNumericStepperChange', [originalTag, MusicBeatState.getVariables().get(originalTag).value], false, null, null);}
 			MusicBeatState.getVariables().set(tag, leNumStepper);
 		});
 
