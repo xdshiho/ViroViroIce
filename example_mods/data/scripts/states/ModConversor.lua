@@ -30,7 +30,6 @@ function onCreate()
     setSoundVolume(_, 0)
 
     setPropertyFromClass('flixel.FlxG', 'mouse.visible', true)
-    -- setPropertyFromClass('flixel.FlxG', 'mouse.useSystemCursor', true) -- eu gosto do meu cursor de gatinho gay... mas pensei melhor e é melhor deixar com o cursor da engine por consistencia!
 
     makeLuaSprite('bg', 'menuDesat')
     setProperty('bg.color', 0x353639)
@@ -68,23 +67,6 @@ function onCreate()
 
     xereca()
     bolas()
-
-    --[[if not ignoreMods then
-        absolutePath = 'mods/'..curMod..'/'
-        
-        for i = 1, #folderNames do
-            if runHaxeFunction('folderExists', {absolutePath..folderNames[i]}) then
-                checkThisFolder[i] = true
-            end
-
-            if checkThisFolder[i] then
-                files[i] = directoryFileList(absolutePath..folderNames[i])
-            end
-        end
-
-        local songs = directoryFileList(absolutePath..'songs/'..files[5][1])
-        debugPrint(#songs)
-    end]]
 end
 
 function onUpdate(elapsed)
@@ -92,7 +74,6 @@ function onUpdate(elapsed)
     if keyboardJustPressed('ESCAPE') then
         switchState('states.MainMenuState')
         soundFadeIn(_, 4, 0, 0.7)
-        --setPropertyFromClass('flixel.FlxG', 'mouse.useSystemCursor', false)
     end
 
     setProperty('mouseHitbox.x', getMouseX())
@@ -125,6 +106,16 @@ function onButtonPressed(tag)
 end
 
 function convertStuff()
+
+    checkThisFolder = { -- talvez isso deixe converter vários de uma vez? (não testei)
+    --false, characters ainda não
+
+        false, -- 1. custom_events
+        false, -- 2. custom_notetypes
+        false, -- 3. data
+        false, -- 4. scripts
+        false --  5. songs
+    }
 
     if not ignoreMods then
         absolutePath = 'mods/'..curMod..'/'
