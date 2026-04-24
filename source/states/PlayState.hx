@@ -814,8 +814,7 @@ class PlayState extends ScriptedState
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.data.hideHud;
-		uiGroup.add(scoreTxt);
+		scoreTxt.visible = false;
 
 		botplayTxt = new FlxText(400, healthBar.y - 90, FlxG.width - 800, Language.getPhrase("Botplay").toUpperCase(), 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -995,6 +994,7 @@ class PlayState extends ScriptedState
 		lua.set('modchart', ClientPrefs.data.modchart);
 		lua.set('pixelRender', ClientPrefs.data.weekpixel);
 		lua.set('allowMiku', ClientPrefs.data.mikudside);
+		lua.set('customScore', ClientPrefs.data.customScore);
 		lua.set('extra', ClientPrefs.data.extra);
 		lua.set('stageUI', stageUI);
 		

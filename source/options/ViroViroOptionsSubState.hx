@@ -30,6 +30,12 @@ class ViroViroOptionsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
+		var option:Option = new Option('Custom Score',
+			'Disables the default score text and enables the custom one, which can be edited with a Script.lua.',
+			'customScore',
+			BOOL);
+		addOption(option);
+
         var option:Option = new Option('Extra',
 			'Eles estao de olho em nois da silva.',
 			'extra',
