@@ -648,6 +648,25 @@ class FunkinLua {
 		if (FlxG.state is ScriptedSubState)
 			st = cast FlxG.state;
 
+		registerFunction('addRemixRemover', function(suffix:String) {
+			if (game.bucetaTira == null)
+				game.bucetaTira = [];
+
+			if (suffix == null || suffix.trim() == "")
+				return;
+
+			if (!game.bucetaTira.contains(suffix))
+				game.bucetaTira.push(suffix);
+		});
+
+		registerFunction('clearRemixes', function() {
+			game.bucetaTira = [];
+		});
+
+			
+
+			// oi shihooooo
+
 		registerFunction("createLabel", function(spr:String, txt:String, box:String, tab:String){
 			if (box != null && tab != null)
 			{

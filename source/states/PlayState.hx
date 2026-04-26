@@ -574,6 +574,17 @@ class PlayState extends ScriptedState
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 
+		// https://media1.tenor.com/m/fP1Qr3rwSHkAAAAd/praying-angel.gif caralho
+		var cuW:Int = FlxG.width;
+		var cuH:Int = FlxG.height;
+
+		camGame.width = Std.int(cuW * 2.5); 
+		camGame.height = Std.int(cuH * 3.5);
+
+		camGame.x = -(camGame.width - cuW) / 2;
+		camGame.y = -(camGame.height - cuH) / 2;
+
+
 		FlxG.cameras.add(camHUD, false);
 
 		persistentUpdate = true;
@@ -741,14 +752,15 @@ class PlayState extends ScriptedState
 		Conductor.songPosition = -Conductor.crochet * 5 + Conductor.offset;
 		
 		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 14);
+		timeTxt.setFormat(Paths.font("better-vcr.ttf"), 14, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
-		timeTxt.borderSize = 2;
+		timeTxt.borderSize = 1;
 		timeTxt.visible = updateTime = showTime;
-		if(ClientPrefs.data.downScroll) timeTxt.y = FlxG.height - 44;
-		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = SONG.song;
+		if(ClientPrefs.data.downScroll) timeTxt.y = 660;
+		else timeTxt.y = 28;
+		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = remixesPorraMerda(SONG.song);
 
 		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
@@ -760,11 +772,11 @@ class PlayState extends ScriptedState
 
 		noteGroup.add(strumLineNotes);
 
-		if(ClientPrefs.data.timeBarType == 'Song Name')
+		/*if(ClientPrefs.data.timeBarType == 'Song Name') //VOCÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ
 		{
 			timeTxt.size = 24;
 			timeTxt.y += 3;
-		}
+		}*/
 
 		generateSong();
 
@@ -814,7 +826,11 @@ class PlayState extends ScriptedState
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = false;
+		scoreTxt.visible = !ClientPrefs.data.hideHud;
+		uiGroup.add(scoreTxt);
+		
+		if (ClientPrefs.data.downScroll) scoreTxt.y = 100;
+		else scoreTxt.y = 680;
 
 		botplayTxt = new FlxText(400, healthBar.y - 90, FlxG.width - 800, Language.getPhrase("Botplay").toUpperCase(), 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1600,17 +1616,48 @@ class PlayState extends ScriptedState
 	*/
 	public dynamic function updateScoreText()
 	{
-		var str:String = Language.getPhrase('rating_$ratingName', ratingName);
-		if(totalPlayed != 0)
+		var accText:String = "0.00%";
+		if (totalPlayed != 0)
+			accText = CoolUtil.floorDecimal(ratingPercent * 100, 2) + "%";
+
+		var currentFC:String = (ratingFC == "") ? "?" : ratingFC;
+
+		var tudo:String = "SCORE: " + songScore + " | MISSES: " + songMisses + " | ACC: " + accText + " (" + currentFC + ")";
+		scoreTxt.text = tudo;
+		scoreTxt.clearFormats();
+
+		var indexAcc:Int = tudo.indexOf(accText);
+		if (indexAcc != -1)
+			scoreTxt.addFormat(new flixel.text.FlxTextFormat(0xFF57FFFF), indexAcc, indexAcc + accText.length);
+
+		if (currentFC != "?")
 		{
-			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
-			str += ' (${percent}%) - ' + Language.getPhrase(ratingFC);
+			var color:Int = 0xFFFFFFFF;
+			if (currentFC == "SFC" || currentFC == "GFC" || currentFC == "NFC")
+				color = 0xFFFFBA0D;
+
+			var indexFc:Int = tudo.indexOf(currentFC);
+			if (indexFc != -1)
+				scoreTxt.addFormat(new flixel.text.FlxTextFormat(color), indexFc, indexFc + currentFC.length);
+		}
+	}
+
+	public var bucetaTira:Array<String> = [];
+
+	public function remixesPorraMerda(name:String):String {
+		var remixes:Array<String> = [' erect', '-erect', '(erect)', ' nightmare', '-nightmare', '(nightmare)'];
+
+		if (bucetaTira != null && bucetaTira.length > 0) // fazer isso softcoded pra ser lindo e ngm reclamar
+			remixes = remixes.concat(bucetaTira);
+		var lowered:String = name.toLowerCase();
+
+		for (suffix in remixes) {
+			if (StringTools.endsWith(lowered, suffix.toLowerCase())) {
+				return name.substring(0, name.length - suffix.length);
+			}
 		}
 
-		var tempScore:String;
-		if(!instakillOnMiss) tempScore = Language.getPhrase('score_text', 'Score: {1} | Misses: {2} | Rating: {3}', [Std.string(songScore), Std.string(songMisses), str]);
-		else tempScore = Language.getPhrase('score_text_instakill', 'Score: {1} | Rating: {2}', [Std.string(songScore), str]);
-		scoreTxt.text = tempScore;
+		return name;
 	}
 
 	/**
@@ -2267,9 +2314,15 @@ class PlayState extends ScriptedState
 
 			var secondsTotal:Int = Math.floor(songCalc / 1000);
 			if(secondsTotal < 0) secondsTotal = 0;
+			
+			var lengthTotal:Int = Math.floor(songLength / 1000);
 
-			if(ClientPrefs.data.timeBarType != 'Song Name')
-				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
+			if(ClientPrefs.data.timeBarType != 'Song Name') {
+				var curTimeStr:String = FlxStringUtil.formatTime(secondsTotal, false);
+				var maxTimeStr:String = FlxStringUtil.formatTime(lengthTotal, false);
+				
+				timeTxt.text = curTimeStr + ' / ' + maxTimeStr;
+			}
 		}
 
 		if (camZooming)
