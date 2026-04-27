@@ -16,10 +16,9 @@ class Difficulty
 		if(num == null) num = PlayState.storyDifficulty;
 
 		var filePostfix:String = list[num];
-		if(filePostfix != null && Paths.formatToSongPath(filePostfix) != Paths.formatToSongPath(defaultDifficulty))
-			filePostfix = '-' + filePostfix;
-		else
-			filePostfix = '';
+		if(filePostfix == null && Paths.formatToSongPath(filePostfix) == Paths.formatToSongPath(defaultDifficulty))
+			filePostfix = defaultDifficulty;
+
 		return Paths.formatToSongPath(filePostfix);
 	}
 
