@@ -253,4 +253,27 @@ class Mods
 		}
 		#end
 	}
+
+	public static function clearStoredWithoutStickers() {
+		//! Doesn't actually clear the stickers
+		@:privateAccess
+		var cache = FlxG.bitmap._cache;
+		for (key => val in cache){
+			if(	key.toLowerCase().contains("transitionswag") || 
+				key.contains("bg_graphic_") ||
+				key == "images/faceSticker.png"
+			) Paths.currentTrackedAssets.set(key,val);
+		}
+		Paths.clearStoredMemory();
+		cacheStickersToContext();
+	}
+	
+	public static function cacheStickersToContext() {
+		for (key => val in Paths.currentTrackedAssets){
+			if(	key.toLowerCase().contains("transitionswag") || 
+				key.contains("bg_graphic_") ||
+				key == "images/faceSticker.png"
+			) Paths.localTrackedAssets.push(key);
+		}
+	}
 }

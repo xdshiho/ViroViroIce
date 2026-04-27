@@ -19,6 +19,7 @@ class MasterEditorMenu extends ScriptedSubState
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
 		'Note Splash Editor',
+		'Test Stickers',
 		'PE To VVIE Conversor'
 	];
 	var optionFunctions:Map<String, Void -> Void> = [];
@@ -73,6 +74,7 @@ class MasterEditorMenu extends ScriptedSubState
 		optionFunctions['Dialogue Editor'] = () -> LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 		optionFunctions['Dialogue Portrait Editor'] = () -> LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
 		optionFunctions['Note Splash Editor'] =  () -> MusicBeatState.switchState(new NoteSplashEditorState());
+		optionFunctions['Test Stickers'] =  () -> MusicBeatState.switchState(new StickerTest());
 		optionFunctions['PE To VVIE Conversor'] =  () -> MusicBeatState.switchState(new CustomState('ModConversor'));
 		
 		#if MODS_ALLOWED
