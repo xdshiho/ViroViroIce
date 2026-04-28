@@ -753,7 +753,7 @@ class PlayState extends ScriptedState
 		Conductor.songPosition = -Conductor.crochet * 5 + Conductor.offset;
 		
 		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 21, 400, "", 14);
+		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 14);
 		timeTxt.setFormat(Paths.font("better-vcr.ttf"), 14, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
@@ -763,7 +763,7 @@ class PlayState extends ScriptedState
 		else timeTxt.y = 28;
 		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = remixesPorraMerda(SONG.song);
 
-		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
+		timeBar = new Bar(0, timeTxt.y - 1, 'timeBar', function() return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
 		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
