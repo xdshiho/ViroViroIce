@@ -26,6 +26,7 @@ import states.editors.CharacterEditorState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
+import substates.StickerSubState;
 
 #if !flash
 import openfl.filters.ShaderFilter;
@@ -752,7 +753,7 @@ class PlayState extends ScriptedState
 		Conductor.songPosition = -Conductor.crochet * 5 + Conductor.offset;
 		
 		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 14);
+		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 21, 400, "", 14);
 		timeTxt.setFormat(Paths.font("better-vcr.ttf"), 14, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
@@ -1306,7 +1307,7 @@ class PlayState extends ScriptedState
 	 * 
 	 * @param 	skipTransition 	Whether the fade transition should be skipped when exiting.
 	*/
-	public static function exitSong(skipTransition:Bool = false):Void {
+	function exitSong(skipTransition:Bool = false):Void {
 		if (instance == null || instance.callOnScripts('onExitSong', null, true) == LuaUtils.Function_Stop) return;
 		
 		if (skipTransition) {
@@ -1321,12 +1322,20 @@ class PlayState extends ScriptedState
 		
 		Mods.loadTopMod();
 		if (PlayState.isStoryMode) {
-			MusicBeatState.switchState(new StoryMenuState());
+			if (Mods.modUsesStickerTrans()) {
+				openSubState(new StickerSubState(null, (sticker) -> new StoryMenuState(sticker)));
+			} else {
+				MusicBeatState.switchState(new StoryMenuState());
+			 	FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			}
 		} else {
-			MusicBeatState.switchState(new FreeplayState());
+			if (Mods.modUsesStickerTrans()) {
+				openSubState(new StickerSubState(null, (sticker) -> new FreeplayState(sticker)));
+			} else {
+				MusicBeatState.switchState(new FreeplayState());
+			 	FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			}
 		}
-
-		FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		PlayState.instance.canResync = false;
 		PlayState.changedDifficulty = false;
 		PlayState.chartingMode = false;
@@ -3023,7 +3032,7 @@ class PlayState extends ScriptedState
 		}
 	}
 	
-	var transitioning = false;
+	public var transitioning = false;
 	public function endSong()
 	{
 		//Should kill you if you tried to cheat
@@ -3091,7 +3100,12 @@ class PlayState extends ScriptedState
 					#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
 
 					canResync = false;
-					MusicBeatState.switchState(new StoryMenuState());
+					if (Mods.modUsesStickerTrans()) {
+						openSubState(new StickerSubState(null, (sticker) -> new StoryMenuState(sticker)));
+					} else {
+						MusicBeatState.switchState(new StoryMenuState());
+						FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					}
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {
@@ -3126,8 +3140,12 @@ class PlayState extends ScriptedState
 				#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
 
 				canResync = false;
-				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				if (Mods.modUsesStickerTrans()) {
+					openSubState(new StickerSubState(null, (sticker) -> new FreeplayState(sticker)));
+				} else {
+					MusicBeatState.switchState(new FreeplayState());
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				}
 				changedDifficulty = false;
 			}
 			transitioning = true;

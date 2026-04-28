@@ -319,7 +319,30 @@ function getPauseSong()
 						}
 						OptionsState.onPlayState = true;
 					case "Exit to menu":
-						PlayState.exitSong();
+						#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
+						PlayState.deathCounter = 0;
+						PlayState.seenCutscene = false;
+
+						PlayState.instance.canResync = false;
+						if (PlayState.isStoryMode) {
+							PlayState.storyPlaylist = [];
+							if (Mods.modUsesStickerTrans()) {
+								openSubState(new StickerSubState(null, (sticker) -> new StoryMenuState(sticker)));
+							} else {
+								MusicBeatState.switchState(new StoryMenuState());
+			 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+							}
+						} else {
+							if (Mods.modUsesStickerTrans()) {
+								openSubState(new StickerSubState(null, (sticker) -> new FreeplayState(sticker)));
+							} else {
+								MusicBeatState.switchState(new FreeplayState());
+			 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+							}
+						}
+						PlayState.changedDifficulty = false;
+						PlayState.chartingMode = false;
+						FlxG.camera.followLerp = 0;
 				}
 			}
 		}

@@ -171,12 +171,20 @@ class GameOverSubstate extends ScriptedSubState
 					Mods.loadTopMod();
 					
 					if (PlayState.isStoryMode) {
-						MusicBeatState.switchState(new StoryMenuState());
+						if (Mods.modUsesStickerTrans()) {
+							openSubState(new StickerSubState(null, (sticker) -> new StoryMenuState(sticker)));
+						} else {
+							MusicBeatState.switchState(new StoryMenuState());
+			 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+						}
 					} else {
-						MusicBeatState.switchState(new FreeplayState());
+						if (Mods.modUsesStickerTrans()) {
+							openSubState(new StickerSubState(null, (sticker) -> new FreeplayState(sticker)));
+						} else {
+							MusicBeatState.switchState(new FreeplayState());
+			 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+						}
 					}
-		
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				}
 			} else if (justPlayedLoop) {
 				coolStartDeath();

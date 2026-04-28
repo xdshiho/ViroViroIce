@@ -9,6 +9,7 @@ import objects.MusicPlayer;
 
 import options.GameplayChangersSubState;
 import substates.ResetScoreSubState;
+import substates.StickerSubState;
 
 import flixel.math.FlxMath;
 import flixel.util.FlxDestroyUtil;
@@ -52,11 +53,29 @@ class FreeplayState extends ScriptedState
 
 	var player:MusicPlayer;
 
+	var stickerSubState:StickerSubState;
+	public function new(?stickers:StickerSubState = null)
+	{
+		super();
+
+		if (stickers != null)
+		{
+			stickerSubState = stickers;
+		}
+	}
+
 	override function create()
 	{
 		preCreate();
 		//Paths.clearStoredMemory();
 		//Paths.clearUnusedMemory();
+
+		if (stickerSubState != null)
+		{
+			openSubState(stickerSubState);
+			stickerSubState.degenStickers();
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		}
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;

@@ -254,6 +254,13 @@ class Mods
 		#end
 	}
 
+	inline public static function modUsesStickerTrans()
+	{
+		var pack:Dynamic = getPack(Mods.currentModDirectory);
+		if (pack != null && pack.usesStickerTransition != null) return pack.usesStickerTransition;
+		return false;
+	}
+
 	public static function clearStoredWithoutStickers() {
 		//! Doesn't actually clear the stickers
 		@:privateAccess

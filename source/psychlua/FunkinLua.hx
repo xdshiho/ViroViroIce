@@ -30,6 +30,7 @@ import states.FreeplayState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
+import substates.StickerSubState;
 
 import psychlua.LuaUtils;
 import psychlua.ModchartSprite;
@@ -666,6 +667,12 @@ class FunkinLua {
 			
 
 			// oi shihooooo
+			// oi milyyyyyy
+
+		registerFunction("changeTransStickers", function(stickerSet:String = null, stickerPack:String = null) {
+                if (stickerSet != null && stickerSet != '') StickerSubState.STICKER_SET = stickerSet;
+                if (stickerPack != null && stickerPack != '') StickerSubState.STICKER_PACK = stickerPack;
+            });
 
 		registerFunction("createLabel", function(spr:String, txt:String, box:String, tab:String){
 			if (box != null && tab != null)
@@ -1536,7 +1543,46 @@ class FunkinLua {
 			return true;
 		});
 		registerFunction('exitSong', function(skipTransition:Bool = false) {
-			PlayState.exitSong(skipTransition);
+			#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
+			PlayState.deathCounter = 0;
+			PlayState.seenCutscene = false;
+
+			PlayState.instance.canResync = false;
+			var target = game.subState != null ? game.subState : game;
+			if (PlayState.isStoryMode)
+			{
+				PlayState.storyPlaylist = [];
+				if (skipTransition) {
+					FlxG.switchState(() -> new StoryMenuState());
+					FlxTransitionableState.skipNextTransOut = true;
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				} else {
+					if (Mods.modUsesStickerTrans()) {
+						target.openSubState(new StickerSubState(null, (sticker) -> new StoryMenuState(sticker)));
+					} else {
+						MusicBeatState.switchState(new StoryMenuState());
+						FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					}
+				}
+			}
+			else
+			{
+				if(skipTransition) {
+					FlxG.switchState(() -> new FreeplayState());
+					FlxTransitionableState.skipNextTransOut = true;
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				} else {
+					if (Mods.modUsesStickerTrans()) {
+						target.openSubState(new StickerSubState(null, (sticker) -> new FreeplayState(sticker)));
+					} else {
+						MusicBeatState.switchState(new FreeplayState());
+						FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					}
+				}
+			}
+			PlayState.changedDifficulty = false;
+			PlayState.chartingMode = false;
+			FlxG.camera.followLerp = 0;
 			return true;
 		});
 		
