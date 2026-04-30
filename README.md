@@ -1,23 +1,26 @@
-hi Ashley, your engine is really good i love it!
-
-this is just a fork of Psych Engine Mint soooo go support the engine!
+Logo.png
 
 
+**ViroViroIce** é uma versão extremamente modificada da **Psych Engine Mint**. Uma engine feita por Ashley. (haiii)
 
+Sua maior característica é seu sistema de soft coding para states, reorganização, novos editores e eventos.
 
-# Friday Night Funkin': Psych Engine Mint
+## FEATURES:
 
-![Logo](docs/img/PsychEngineMint.png)
+* Custom States totalmente reformulado da Psych Mint (com lua e hx.)
 
-[Join the Discord!](https://discord.gg/nGcTH6vNVR)
+* Package Mods. (Mini Modfolders)
 
-This is a Friday Night Funkin: Psych Engine fork created to expand on the engine's functionality, keeping it up-to-date and being mod compatible with the original engine (it doesn't go the other way around, of course).
+* API nova com múltiplas funções. (Shaders!!!)
 
-Built on Psych Engine version **1.0.4**.
+* BF Mix 2
 
+* Characters reforumlados
 
-## Features
+* Stickers!!!!!!
 
-See this fork's changelog [here](/docs/CHANGELOG.md)!
+* Lesbian thingie i guess?
 
-See a rundown of this engine's features [here](/docs/FEATURES.md)!
+* Sex update 2
+
+* Modcharts ing
