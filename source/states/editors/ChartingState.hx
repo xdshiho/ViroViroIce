@@ -580,8 +580,8 @@ class ChartingState extends ScriptedState implements PsychUIEventHandler.PsychUI
 	function createToys() {
 		var centerX:Float = gridBg.x * .5;
 		
-		bfToy = new Toy(centerX + 110, FlxG.height - 50, 'bf', PLAYER);
-		gfToy = new Toy(centerX, FlxG.height - 50, 'gf-nospeak', GF);
+		bfToy = new Toy(centerX + 110, FlxG.height - 50, 'bfmix2', PLAYER);
+		gfToy = new Toy(centerX, FlxG.height - 50, 'red', GF);
 		dadToy = new Toy(centerX - 110, FlxG.height - 50, 'bf-pixel-opponent', OPPONENT);
 		
 		for (toy in [gfToy, bfToy, dadToy]) {

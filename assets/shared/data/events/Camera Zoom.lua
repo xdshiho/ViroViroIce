@@ -36,3 +36,10 @@ function onEvent(name, v1, v2)
         doTweenZoom('camZoomTween', 'camGame', evilZoom, evilTime, evilease)
     end
 end
+
+function onTweenCompleted(tag, vars)
+    
+    if tag == 'camZoomTween' then
+        setProperty('defaultCamZoom', getProperty('camGame.zoom')) -- pra camera não voltar pro lugar original quando o tween acabar
+    end
+end
