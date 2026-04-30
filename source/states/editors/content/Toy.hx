@@ -46,8 +46,8 @@ class Toy extends objects.Character {
 	
 	public function getDefaultCharacter(side:ToySide) {
 		return switch (side) {
-			case GF: (PlayState.SONG.gfVersion ?? 'gf-nospeak');
-			case PLAYER: (PlayState.SONG.player1 ?? 'bf-car');
+			case GF: (PlayState.SONG.gfVersion ?? 'red');
+			case PLAYER: (PlayState.SONG.player1 ?? 'bfmix2');
 			case OPPONENT: (PlayState.SONG.player2 ?? 'dad');
 		}
 	}
