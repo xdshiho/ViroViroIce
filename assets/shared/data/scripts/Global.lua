@@ -38,28 +38,18 @@ local ScoreTxtOverIcons = true
 -- CALLBACKS OR SMTH
 -- ===================================================
 
+function onCreate()
+    boybird_create()
+end
 
 function onCreatePost()
-    pixelRender_createPost()
     miku_createPost()
-        hud_createPost()
+        pixelRender_createPost()
 end
 
 function onUpdate()
     miku_onUpdate()
-        hud_onUpdate()
-end
-
-function onUpdatePost()
-    hud_UpdatePost() -- acabei nem usando lol
-end
-
-function onGoodNoteHit(id, direction, noteType, isSustainNote)
-    hud_BFNoteHit() -- supostamente para usar num bump de score na hud, porém eu sou muito ruim em tudo shiho me ajuda e faz isso por mim, acho q quebrei meu próprio codigo pq ironicamente foi mais facil fazer em haxe essa prr
-end
-
-function onSongStart()
-        hud_SongStart()
+        boybird_update()
 end
 
 -- ===================================================
@@ -83,6 +73,7 @@ local mikudsidea = false
 
 function miku_createPost()
     mikudsidea = allowMiku and stageUI == 'pixel'
+    oldAssFreak = boyfriendName
 
     addCharacterToList('bf-miku', 'bf')
     makeLuaSprite('mikuon', 'game/playablemiku', 840, 0)
@@ -107,7 +98,6 @@ function miku_onUpdate(elapsed)
     if getPropertyFromClass('flixel.FlxG', 'keys.justPressed.M') and stageUI ~= 'pixel' then
         
         if not mikutrue then
-            oldAssFreak = getProperty('boyfriend.curCharacter')
             penis = getPropertyFromClass('openfl.Lib', 'application.window.title')
             triggerEvent('Change Character', 'bf', 'bf-miku')
             triggerEvent('Hey!', '', '')
@@ -163,7 +153,21 @@ function playMikuRandom()
 end
 
 
--- ===================================================
--- HUD THING
--- ===================================================
+local fudido
+function boybird_create()
+    fudido = boyfriendName
+end
 
+function boybird_update()
+    
+    if keyboardJustPressed('F1') and stageUI ~= 'pixel' then
+        if boyfriendName ~= fudido then
+            triggerEvent('Change Character', 'bf', fudido or 'bf')
+            playSound('byeBoybird')
+        else
+            triggerEvent('Change Character', 'bf', 'bf-bird')
+            triggerEvent('Hey!', '', '')
+            playSound('hiBoybird')
+        end
+    end
+end
