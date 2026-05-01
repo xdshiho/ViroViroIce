@@ -384,10 +384,35 @@ class CharacterEditorState extends ScriptedState implements PsychUIEventHandler.
 		check_player.checked = character.isPlayer;
 		check_player.onClick = function()
 		{
+			// Ele salva o ofset aplicado ou porra asim
+			var curAnimData = (anims != null && curAnim < anims.length) ? anims[curAnim] : null;
+			if (curAnimData != null)
+			{
+				if (character.isPlayer)
+				{
+					if (curAnimData.offsets_player == null) curAnimData.offsets_player = [0, 0];
+					curAnimData.offsets_player[0] = Std.int(character.offset.x);
+					curAnimData.offsets_player[1] = Std.int(character.offset.y);
+				}
+				else
+				{
+					if (curAnimData.offsets == null) curAnimData.offsets = [0, 0];
+					curAnimData.offsets[0] = Std.int(character.offset.x);
+					curAnimData.offsets[1] = Std.int(character.offset.y);
+				}
+			}
+
 			character.isPlayer = !character.isPlayer;
 			character.flipX = !character.flipX;
+			character.refreshOffsets(); // eu sinto que eu crashei o jogo
+
+			if (curAnimData != null && character.hasAnimation(curAnimData.anim))
+				character.playAnim(curAnimData.anim, true);
+
 			updateCharacterPositions();
 			updatePointerPos(false);
+			updateText();
+			unsavedProgress = true;
 		};
 
 		var reloadCharacter:PsychUIButton = new PsychUIButton(140, 20, "Reload Char", function()
@@ -402,17 +427,17 @@ class CharacterEditorState extends ScriptedState implements PsychUIEventHandler.
 		{
 			final _template:CharacterFile =
 			{
-				animations: [
-					newAnim('idle', 'BF idle dance'),
-					newAnim('singLEFT', 'BF NOTE LEFT0'),
-					newAnim('singDOWN', 'BF NOTE DOWN0'),
-					newAnim('singUP', 'BF NOTE UP0'),
-					newAnim('singRIGHT', 'BF NOTE RIGHT0')
+				animations: [ // Mudei pq era mt especifico ser do BF o template
+					newAnim('idle', 'idle'),
+					newAnim('singLEFT', 'left'),
+					newAnim('singDOWN', 'down'),
+					newAnim('singUP', 'up'),
+					newAnim('singRIGHT', 'right')
 				],
 				no_antialiasing: false,
 				flip_x: false,
 				healthicon: 'face',
-				image: 'characters/BOYFRIEND',
+				image: 'characters/MR_TEMPLATE',
 				sing_duration: 4,
 				scale: 1,
 				healthbar_colors: [161, 161, 161],
@@ -434,6 +459,51 @@ class CharacterEditorState extends ScriptedState implements PsychUIEventHandler.
 		});
 		templateCharacter.normalStyle.bgColor = FlxColor.RED;
 		templateCharacter.normalStyle.textColor = FlxColor.WHITE;
+
+		/*var templateCharacterCool:PsychUIButton = new PsychUIButton(140, 80, "Load Awesome Template", function()
+		{
+			final _templateCool:CharacterFile =
+			{
+				animations: [ // Template mas maneiro
+					newAnim('idle', 'idle'),
+					newAnim('singLEFT', 'left'),
+					newAnim('singDOWN', 'down'),
+					newAnim('singUP', 'up'),
+					newAnim('singRIGHT', 'right'),
+					newAnim('singLEFT-alt', 'left-alt'),
+					newAnim('singDOWN-alt', 'down-alt'),
+					newAnim('singUP-alt', 'up-alt'),
+					newAnim('singRIGHT-alt', 'right-miss'),
+					newAnim('singLEFT-MISS', 'left-miss'),
+					newAnim('singDOWN-MISS', 'down-miss'),
+					newAnim('singUP-MISS', 'up-miss'),
+					newAnim('singRIGHT-MISS', 'right-miss')
+				],
+				no_antialiasing: false,
+				flip_x: false,
+				healthicon: 'face',
+				image: 'characters/MR_TEMPLATE',
+				sing_duration: 4,
+				scale: 1,
+				healthbar_colors: [161, 161, 161],
+				camera_position: [0, 0],
+				position: [0, 0],
+				vocals_file: null
+			};
+
+			character.loadCharacterFile(_templateCool);
+			character.missingCharacter = false;
+			character.color = FlxColor.WHITE;
+			character.alpha = 1;
+			reloadAnimList();
+			reloadCharacterOptions();
+			updateCharacterPositions();
+			updatePointerPos();
+			reloadCharacterDropDown();
+			updateHealthBar();
+		});
+		templateCharacterCool.normalStyle.bgColor = FlxColor.RED;
+		templateCharacterCool.normalStyle.textColor = FlxColor.WHITE;*/
 
 
 		charDropDown = new PsychUIDropDownMenu(10, 30, [''], function(index:Int, intended:String)
@@ -532,9 +602,11 @@ class CharacterEditorState extends ScriptedState implements PsychUIEventHandler.
 
 			var lastAnim:String = (character.animationsArray[curAnim] != null) ? character.animationsArray[curAnim].anim : '';
 			var lastOffsets:Array<Int> = [0, 0];
+			var lastOffsetsPlayer:Null<Array<Int>> = null;
 			for (anim in character.animationsArray)
 				if(animationInputText.text == anim.anim) {
 					lastOffsets = anim.offsets;
+					lastOffsetsPlayer = anim.offsets_player;
 					if(character.hasAnimation(animationInputText.text))
 					{
 						if(!character.isAnimateAtlas) character.animation.remove(animationInputText.text);
@@ -548,6 +620,7 @@ class CharacterEditorState extends ScriptedState implements PsychUIEventHandler.
 			addedAnim.loop = animationLoopCheckBox.checked;
 			addedAnim.indices = indices;
 			addedAnim.offsets = lastOffsets;
+			addedAnim.offsets_player = lastOffsetsPlayer;
 			addAnimation(addedAnim.anim, addedAnim.name, addedAnim.fps, addedAnim.loop, addedAnim.indices);
 			character.animationsArray.push(addedAnim);
 
@@ -993,10 +1066,21 @@ class CharacterEditorState extends ScriptedState implements PsychUIEventHandler.
 		}
 
 		var anim = anims[curAnim];
-		if(changedOffset && anim != null && anim.offsets != null)
+		if(changedOffset && anim != null)
 		{
-			anim.offsets[0] = Std.int(character.offset.x);
-			anim.offsets[1] = Std.int(character.offset.y);
+			// salva :thumbs1up:
+			if (character.isPlayer)
+			{
+				if (anim.offsets_player == null) anim.offsets_player = [0, 0];
+				anim.offsets_player[0] = Std.int(character.offset.x);
+				anim.offsets_player[1] = Std.int(character.offset.y);
+			}
+			else
+			{
+				if (anim.offsets == null) anim.offsets = [0, 0];
+				anim.offsets[0] = Std.int(character.offset.x);
+				anim.offsets[1] = Std.int(character.offset.y);
+			}
 
 			character.addOffset(anim.anim, character.offset.x, character.offset.y);
 			updateText();
@@ -1170,17 +1254,20 @@ class CharacterEditorState extends ScriptedState implements PsychUIEventHandler.
 		animsTxt.removeFormat(selectedFormat);
 
 		var intendText:String = '';
+		var burroSuffix:String = character.isPlayer ? ' [P]' /*Player*/ : ' [O]'; /*Oponente*/
 		for (num => anim in anims)
 		{
 			if(num > 0) intendText += '\n';
 
+			var curOffsets:Array<Int> = (character.isPlayer && anim.offsets_player != null) ? anim.offsets_player : anim.offsets;
+
 			if(num == curAnim)
 			{
 				var n:Int = intendText.length;
-				intendText += anim.anim + ": " + anim.offsets;
+				intendText += anim.anim + burroSuffix + ": " + curOffsets;
 				animsTxt.addFormat(selectedFormat, n, intendText.length);
 			}
-			else intendText += anim.anim + ": " + anim.offsets;
+			else intendText += anim.anim + ": " + curOffsets;
 		}
 		animsTxt.text = intendText;
 	}
@@ -1317,7 +1404,7 @@ class CharacterEditorState extends ScriptedState implements PsychUIEventHandler.
 			"_editor_isPlayer": character.isPlayer
 		};
 
-		var data:String = PsychJsonPrinter.print(json, ['offsets', 'position', 'healthbar_colors', 'camera_position', 'indices']);
+		var data:String = PsychJsonPrinter.print(json, ['offsets', 'offsets_player', 'position', 'healthbar_colors', 'camera_position', 'indices']);
 
 		if (data.length > 0)
 		{

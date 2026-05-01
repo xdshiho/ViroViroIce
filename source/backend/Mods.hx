@@ -257,7 +257,7 @@ class Mods
 	inline public static function modUsesStickerTrans()
 	{
 		var pack:Dynamic = getPack(Mods.currentModDirectory);
-		if (pack != null && pack.usesStickerTransition != null) return pack.usesStickerTransition;
+		if (pack != null && pack.enableSticker != null) return pack.enableSticker; // meu amor, usesStickerTransition é mt longo </3
 		return false;
 	}
 

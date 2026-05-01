@@ -36,6 +36,7 @@ typedef AnimArray = {
 	var loop:Bool;
 	var indices:Array<Int>;
 	var offsets:Array<Int>;
+	@:optional var offsets_player:Null<Array<Int>>; // ce acredita que eu esqueci de colocar isso?
 }
 
 class Character extends FlxSprite
@@ -241,10 +242,13 @@ class Character extends FlxSprite
 				}
 				#end
 
-				if(anim.offsets != null && anim.offsets.length > 1) addOffset(anim.anim, anim.offsets[0], anim.offsets[1]);
-				else addOffset(anim.anim, 0, 0);
+				/*if(anim.offsets != null && anim.offsets.length > 1) addOffset(anim.anim, anim.offsets[0], anim.offsets[1]);
+				else addOffset(anim.anim, 0, 0);*/
 			}
 		}
+
+		
+		refreshOffsets(); // aplica as bct
 		
 		comboNoteCounts = findCountAnims('combo');
 		dropNoteCounts = findCountAnims('drop');
@@ -519,6 +523,28 @@ class Character extends FlxSprite
 			danceEveryNumBeats = Math.round(Math.max(calc, 1));
 		}
 		settingCharacterUp = false;
+	}
+
+	/*
+	    eu crashei o jogo mais vezes doq eu gostaria de afirmar
+	 */
+	public function refreshOffsets()
+	{
+		animOffsets = new Map<String, Array<Dynamic>>();
+		for (anim in animationsArray)
+		{
+			if (anim == null || anim.anim == null) continue;
+
+			var useOffsets:Array<Int>;
+			if (isPlayer && anim.offsets_player != null && anim.offsets_player.length > 1)
+				useOffsets = anim.offsets_player;
+			else if (anim.offsets != null && anim.offsets.length > 1)
+				useOffsets = anim.offsets;
+			else
+				useOffsets = [0, 0];
+
+			addOffset(anim.anim, useOffsets[0], useOffsets[1]);
+		}
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
