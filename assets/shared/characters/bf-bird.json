@@ -1,0 +1,99 @@
+{
+	"animations": [
+		{
+			"offsets": [0, 0],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"name": "Idle"
+		},
+		{
+			"offsets": [11, -3],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"name": "Left"
+		},
+		{
+			"offsets": [7, -13],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"name": "Down"
+		},
+		{
+			"offsets": [4, 14],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"name": "Up"
+		},
+		{
+			"offsets": [-100, 2],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"name": "Right"
+		},
+		{
+			"offsets": [18, -3],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"name": "MissLeft"
+		},
+		{
+			"offsets": [-101, 1],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"name": "MissRight"
+		},
+		{
+			"offsets": [22, -14],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"name": "MissDown"
+		},
+		{
+			"offsets": [10, 14],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"name": "MissUp"
+		},
+		{
+			"offsets": [-82, 0],
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"name": "HEY"
+		},
+		{
+			"offsets": [-65, 0],
+			"loop": false,
+			"fps": 24,
+			"anim": "heymiss",
+			"name": "MissHEY"
+		},
+		{
+			"offsets": [1, 9],
+			"loop": false,
+			"fps": 30,
+			"anim": "dreamyEnding",
+			"name": "shitBF"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/silly/Boybird/1,characters/silly/Boybird/2,characters/silly/Boybird/3",
+	"position": [10, 440],
+	"healthicon": "silly/bfbird",
+	"flip_x": true,
+	"healthbar_colors": [80, 165, 235],
+	"camera_position": [-100, 30],
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": true
+}

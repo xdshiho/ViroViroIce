@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Boybird.png">
+	<!-- Created with Adobe Animate version 24.0.5.40 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="HEY0000" x="0" y="0" width="320" height="309"/>
+	<SubTexture name="HEY0001" x="330" y="0" width="320" height="309"/>
+	<SubTexture name="HEY0002" x="660" y="0" width="320" height="309"/>
+	<SubTexture name="HEY0003" x="660" y="0" width="320" height="309"/>
+	<SubTexture name="HEY0004" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0005" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0006" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0007" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0008" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0009" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0010" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0011" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0012" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="HEY0013" x="0" y="319" width="320" height="309"/>
+	<SubTexture name="MissHEY0000" x="330" y="319" width="332" height="313"/>
+	<SubTexture name="MissHEY0001" x="672" y="319" width="332" height="313"/>
+	<SubTexture name="MissHEY0002" x="0" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0003" x="0" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0004" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0005" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0006" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0007" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0008" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0009" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0010" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0011" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0012" x="342" y="642" width="332" height="313"/>
+	<SubTexture name="MissHEY0013" x="342" y="642" width="332" height="313"/>
+</TextureAtlas>
