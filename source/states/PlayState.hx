@@ -1627,11 +1627,11 @@ class PlayState extends ScriptedState
 	{
 		var accText:String = "0.00%";
 		if (totalPlayed != 0)
-			accText = CoolUtil.floorDecimal(ratingPercent * 100, 2) + "%";
+			accText = '${CoolUtil.floorDecimal(ratingPercent * 100, 2)}%';
 
 		var currentFC:String = (ratingFC == "") ? "?" : ratingFC;
 
-		var tudo:String = "SCORE: " + songScore + " | MISSES: " + songMisses + " | ACC: " + accText + " (" + currentFC + ")";
+		var tudo:String = Language.getPhrase('score_text', "SCORE: {1} | MISSES: {2} | ACC: {3} ({4})", [songScore, songMisses, accText, currentFC]);
 		scoreTxt.text = tudo;
 		scoreTxt.clearFormats();
 

@@ -1,20 +1,9 @@
 Português (Brasil)
 
 // Gameplay
-score_text: "Pontos: {1} | Erros: {2} | Avaliação: {3}"
-score_text_instakill: "Pontos: {1} | Avaliação: {2}"
+score_text: "PONTOS: {1} | ERROS: {2} | AVL: {3} ({4})"
+score_text_instakill: "PONTOS: {1} | AVL: {2} ({3})"
 botplay: "Automático"
-
-rating_you_suck: "Que Horrível!"
-rating_shit: "Merda"
-rating_bad: "Ruim"
-rating_bruh: "Mal"
-rating_meh: "Meh"
-rating_nice: "Decente"
-rating_good: "Bom"
-rating_great: "Ótimo"
-rating_sick: "Manda Ver!"
-rating_perfect: "Perfeito!!"
 
 // Dialogues
 dialogue_skip: "Aperte BACK para Pular"
@@ -39,7 +28,7 @@ blueballed: "Broxadas: {1}"
 images/mainmenu/menu_story_mode: "images/pt-BR/mainmenu/menu_story_mode"
 images/mainmenu/menu_credits: "images/pt-BR/mainmenu/menu_credits"
 images/mainmenu/menu_options: "images/pt-BR/mainmenu/menu_options"
-outdated_version: "Você está usando uma versão antiga da Psych Engine Mint!\n(Atualmente usando a {1}, versão mais recente é a {2})\n\n\n-----------------------------------------------\n\n\nPressione ENTER para visitar a página do GameBanana ou\n\npressione ESCAPE para ignorar esta mensagem.\n\n\nVocê pode desabilitar este aviso desmarcando a opção\n\n"Verificar por Atualizações" no menu de Opções.\n\n\n-----------------------------------------------\n\n\nObrigado por usar esta engine!"
+outdated_version: "Você está usando uma versão antiga da ViroViroIce!\n(Atualmente usando a {1}, versão mais recente é a {2})\n\n\n-----------------------------------------------\n\n\nPressione ENTER para visitar a página do GameBanana ou\n\npressione ESCAPE para ignorar esta mensagem.\n\n\nVocê pode desabilitar este aviso desmarcando a opção\n\n"Verificar por Atualizações" no menu de Opções.\n\n\n-----------------------------------------------\n\n\nObrigado por usar esta engine!"
 
 // Story Mode
 images/Menu_Tracks: "images/pt-BR/Menu_Tracks"
