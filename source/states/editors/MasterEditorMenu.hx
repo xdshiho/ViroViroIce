@@ -13,6 +13,7 @@ class MasterEditorMenu extends ScriptedSubState
 	var options:Array<String> = [
 		'Chart Editor',
 		'Character Editor',
+        'Drop Shadow Editor',
 		'Stage Editor',
 		'Week Editor',
 		'Menu Character Editor',
@@ -20,7 +21,7 @@ class MasterEditorMenu extends ScriptedSubState
 		'Dialogue Portrait Editor',
 		'Note Splash Editor',
 		'Test Stickers',
-		'PE To VVIE Conversor'
+		'PE To VVIE Conversor',
 	];
 	var optionFunctions:Map<String, Void -> Void> = [];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
@@ -76,7 +77,7 @@ class MasterEditorMenu extends ScriptedSubState
 		optionFunctions['Note Splash Editor'] =  () -> MusicBeatState.switchState(new NoteSplashEditorState());
 		optionFunctions['Test Stickers'] =  () -> MusicBeatState.switchState(new StickerTest());
 		optionFunctions['PE To VVIE Conversor'] =  () -> MusicBeatState.switchState(new CustomState('ModConversor'));
-		
+		if (PlayState.SONG != null) optionFunctions['Drop Shadow Editor'] =  () -> LoadingState.loadAndSwitchState(new DropShadowEditor(), false);
 		#if MODS_ALLOWED
 		textBG = new FlxSprite(0, FlxG.height - 42).makeGraphic(FlxG.width, 42, 0xFF000000);
 		textBG.scrollFactor.set();
